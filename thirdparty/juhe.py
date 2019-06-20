@@ -7,6 +7,7 @@ def weather(cityname):
     :param cityname: 城市名字
     :return: 返回实况天气
     """
+    # 完全是其他天气 api
     key = 'eeeddf1125c901054f066c5c58ecb484'
     api = 'https://api.openweathermap.org/data/2.5/weather'
     params = 'q=%s&appid=%s' % (cityname, key)
@@ -15,13 +16,13 @@ def weather(cityname):
     response = requests.get(url=url)
     json_data = json.loads(response.text)
     print(json_data)
-    weather = json_data.get('weather')
-    weather_main = weather[0].get('main')
-    print(weather_main)
 
     response = dict()
-    response['weather_main'] = weather[0].get('main')
-    response['temp'] = json_data.get('main').get('temp')
+    response['temperature']=json_data.get('main').get('temp')
+    response['wind_direction'] =json_data.get('wind').get('deg')
+    response['wind_strength'] = json_data.get('wind').get('speed')
+    response['humidity'] = json_data.get('main').get('humidity')
+    response['time'] = json_data.get('dt')
     print(response)
     return response
 

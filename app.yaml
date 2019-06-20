@@ -7,6 +7,10 @@ published:
       url: /service/weather
       desc: this is a weather app.
 
-
-developing:
   - app:
+      category: life
+      application: backup-image
+      name: 图片备份
+      publish_date: 2018-10-01
+      url: /service/image
+      desc: this is a backup image app.
