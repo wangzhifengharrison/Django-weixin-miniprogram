@@ -14,5 +14,6 @@ urlpatterns =[
     # path('image', image.image),
     # http://127.0.0.1:8000/api/v1.0/service/imagetext?md5=02bcecdf1bcbe1a2c446097ea657618c
     # path('imagetext', image.image_text)
-    path('image', image.ImageView.as_view())
+    path('image', image.ImageView.as_view()),
+    path('image/list', image.ImageListView.as_view())
 ]

@@ -32,6 +32,25 @@ def image(request):
     elif request.method == 'POST':
         pass
 
+
+class ImageListView(View, CommonResponseMixin):
+    def get(self, request):
+        image_files = os.listdir(settings.IMAGES_DIR)
+        response_data = []
+        for image_file in image_files:
+            response_data.append(
+                {
+                    "name": image_file,
+                    # -4 后缀不要
+                    "md5": image_file[:-4]
+                }
+            )
+        response_data = self.wrap_json_response(data=response_data)
+        return JsonResponse(data=response_data)
+
+    pass
+
+
 # section 3-5,3-6。 实现图片的查询，删除，和修改
 class ImageView(View, CommonResponseMixin):
     def get(self, request):
@@ -67,7 +86,7 @@ class ImageView(View, CommonResponseMixin):
         return JsonResponse(data=response, safe=False)
 
     def delete(self, request):
-        #从url里面取出 md5
+        # 从url里面取出 md5
         md5 = request.GET.get('md5')
         img_name = md5 + '.jpg'
         path = os.path.join(settings.IMAGES_DIR, img_name)
